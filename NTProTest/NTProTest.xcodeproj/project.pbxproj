@@ -18,6 +18,16 @@
 		A57E154329C0ABB800129006 /* DealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E154229C0ABB800129006 /* DealCell.swift */; };
 		A57E154729C0ACA100129006 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E154629C0ACA100129006 /* HeaderCell.swift */; };
 		A57E154929C0E37100129006 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E154829C0E37100129006 /* FiltersView.swift */; };
+		A57E154B29C0F58800129006 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E154A29C0F58800129006 /* Server.swift */; };
+		A57E154D29C0F59600129006 /* Deal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E154C29C0F59600129006 /* Deal.swift */; };
+		A57E155229C0F61F00129006 /* DealsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E155129C0F61F00129006 /* DealsPresenter.swift */; };
+		A57E155429C0F63A00129006 /* DealsPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E155329C0F63A00129006 /* DealsPresenterProtocol.swift */; };
+		A57E155629C0F64E00129006 /* DealsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E155529C0F64E00129006 /* DealsViewProtocol.swift */; };
+		A57E155829C0F76500129006 /* DealsModulBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E155729C0F76500129006 /* DealsModulBuilder.swift */; };
+		A57E155A29C0F81B00129006 /* ServerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E155929C0F81B00129006 /* ServerProtocol.swift */; };
+		A57E155E29C0F8BB00129006 /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E155D29C0F8BB00129006 /* Routable.swift */; };
+		A57E156129C0F90100129006 /* DealsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E156029C0F90100129006 /* DealsRouter.swift */; };
+		A57E156829C10ADF00129006 /* FiltersTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E156729C10ADF00129006 /* FiltersTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +63,16 @@
 		A57E154229C0ABB800129006 /* DealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealCell.swift; sourceTree = "<group>"; };
 		A57E154629C0ACA100129006 /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		A57E154829C0E37100129006 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
+		A57E154A29C0F58800129006 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		A57E154C29C0F59600129006 /* Deal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deal.swift; sourceTree = "<group>"; };
+		A57E155129C0F61F00129006 /* DealsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealsPresenter.swift; sourceTree = "<group>"; };
+		A57E155329C0F63A00129006 /* DealsPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealsPresenterProtocol.swift; sourceTree = "<group>"; };
+		A57E155529C0F64E00129006 /* DealsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealsViewProtocol.swift; sourceTree = "<group>"; };
+		A57E155729C0F76500129006 /* DealsModulBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealsModulBuilder.swift; sourceTree = "<group>"; };
+		A57E155929C0F81B00129006 /* ServerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerProtocol.swift; sourceTree = "<group>"; };
+		A57E155D29C0F8BB00129006 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
+		A57E156029C0F90100129006 /* DealsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealsRouter.swift; sourceTree = "<group>"; };
+		A57E156729C10ADF00129006 /* FiltersTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +125,13 @@
 			children = (
 				A57E151029C0A62900129006 /* AppDelegate.swift */,
 				A57E151229C0A62900129006 /* SceneDelegate.swift */,
-				A57E151429C0A62900129006 /* DealsListViewController.swift */,
-				A57E154229C0ABB800129006 /* DealCell.swift */,
-				A57E154629C0ACA100129006 /* HeaderCell.swift */,
-				A57E154829C0E37100129006 /* FiltersView.swift */,
+				A57E154E29C0F5DB00129006 /* View */,
+				A57E155029C0F5F600129006 /* DealsPresenter */,
+				A57E156229C0F9BC00129006 /* Server */,
+				A57E155F29C0F8D700129006 /* Router */,
+				A57E156929C116DB00129006 /* Models */,
+				A57E155729C0F76500129006 /* DealsModulBuilder.swift */,
+				A57E156729C10ADF00129006 /* FiltersTypes.swift */,
 				A57E151929C0A62B00129006 /* Assets.xcassets */,
 				A57E151B29C0A62B00129006 /* LaunchScreen.storyboard */,
 				A57E151E29C0A62B00129006 /* Info.plist */,
@@ -131,6 +154,61 @@
 				A57E153329C0A62B00129006 /* NTProTestUITestsLaunchTests.swift */,
 			);
 			path = NTProTestUITests;
+			sourceTree = "<group>";
+		};
+		A57E154E29C0F5DB00129006 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A57E151429C0A62900129006 /* DealsListViewController.swift */,
+				A57E155529C0F64E00129006 /* DealsViewProtocol.swift */,
+				A57E154F29C0F5E400129006 /* Cells */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A57E154F29C0F5E400129006 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A57E154229C0ABB800129006 /* DealCell.swift */,
+				A57E154629C0ACA100129006 /* HeaderCell.swift */,
+				A57E154829C0E37100129006 /* FiltersView.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		A57E155029C0F5F600129006 /* DealsPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				A57E155129C0F61F00129006 /* DealsPresenter.swift */,
+				A57E155329C0F63A00129006 /* DealsPresenterProtocol.swift */,
+			);
+			path = DealsPresenter;
+			sourceTree = "<group>";
+		};
+		A57E155F29C0F8D700129006 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				A57E155D29C0F8BB00129006 /* Routable.swift */,
+				A57E156029C0F90100129006 /* DealsRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		A57E156229C0F9BC00129006 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				A57E155929C0F81B00129006 /* ServerProtocol.swift */,
+				A57E154A29C0F58800129006 /* Server.swift */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		A57E156929C116DB00129006 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A57E154C29C0F59600129006 /* Deal.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,11 +341,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A57E154B29C0F58800129006 /* Server.swift in Sources */,
+				A57E155629C0F64E00129006 /* DealsViewProtocol.swift in Sources */,
 				A57E151529C0A62900129006 /* DealsListViewController.swift in Sources */,
+				A57E155829C0F76500129006 /* DealsModulBuilder.swift in Sources */,
+				A57E155E29C0F8BB00129006 /* Routable.swift in Sources */,
 				A57E151129C0A62900129006 /* AppDelegate.swift in Sources */,
+				A57E156129C0F90100129006 /* DealsRouter.swift in Sources */,
+				A57E154D29C0F59600129006 /* Deal.swift in Sources */,
 				A57E154329C0ABB800129006 /* DealCell.swift in Sources */,
 				A57E154729C0ACA100129006 /* HeaderCell.swift in Sources */,
+				A57E155429C0F63A00129006 /* DealsPresenterProtocol.swift in Sources */,
+				A57E156829C10ADF00129006 /* FiltersTypes.swift in Sources */,
 				A57E154929C0E37100129006 /* FiltersView.swift in Sources */,
+				A57E155A29C0F81B00129006 /* ServerProtocol.swift in Sources */,
+				A57E155229C0F61F00129006 /* DealsPresenter.swift in Sources */,
 				A57E151329C0A62900129006 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

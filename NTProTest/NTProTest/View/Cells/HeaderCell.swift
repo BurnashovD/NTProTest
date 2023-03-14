@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// Хедер
+/// Шапка таблицы
 final class HeaderCell: UITableViewHeaderFooterView {
     // MARK: - Visual components
     
@@ -59,10 +59,10 @@ final class HeaderCell: UITableViewHeaderFooterView {
     
     private func createStackViewAnchors() {
         NSLayoutConstraint.activate([
-            parametersStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            parametersStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            parametersStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            parametersStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            parametersStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            parametersStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            parametersStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            parametersStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
 }

@@ -21,6 +21,14 @@ final class FiltersView: UIView {
         return stack
     }()
     
+    private let filterDirectionStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .equalCentering
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     private let doneButton: UIButton = {
         let button = UIButton()
         button.setTitle("Done", for: .normal)
@@ -31,12 +39,17 @@ final class FiltersView: UIView {
     
     // MARK: - Public properties
     
-    var parameterHandler: (() -> Void)?
+    var parameterHandler: ((FiltersTypes) -> Void)?
+    var directionHandler: ((FiltersTypes.Directions) -> Void)?
     var dismissHandler: (() -> Void)?
     
     // MARK: - Private properties
     
     private let titles = ["Дата изменения сделки", "Имя инструмента", "Цена сделки", "Объем сделки", "Сторона сделки"]
+    private let directionButtonsImageNames = ["chevron.up", "chevron.down"]
+    
+    private var filtersButtons: [UIButton] = []
+    private var previousButtonTag = 0
     
     // MARK: - init
     
@@ -55,26 +68,41 @@ final class FiltersView: UIView {
         super.layoutSubviews()
         createStackViewAnchors()
         createDoneButtonAnchors()
+        createDirectionStackViewAnchors()
     }
     
     // MARK: - Private methods
     
     private func configureUI() {
-        addSubviewsToStack()
+        addSubviewsToFiltersStack()
+        addSubviewsToDirectionStack()
         addSubview(filtersStackView)
         addSubview(doneButton)
-        doneButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+        addSubview(filterDirectionStackView)
+        doneButton.addTarget(self, action: #selector(hideFiltersViewAction), for: .touchUpInside)
     }
     
-    private func addSubviewsToStack() {
+    private func addSubviewsToFiltersStack() {
         (0...4).forEach { index in
             let button = UIButton()
             button.setTitle(titles[index], for: .normal)
             button.titleLabel?.font = .systemFont(ofSize: 15)
-            button.setTitleColor(.black, for: .normal)
+            button.setTitleColor(index == 0 ? .tintColor : .black, for: .normal)
             button.tag = index
             button.addTarget(self, action: #selector(changeFilterAction(sender:)), for: .touchUpInside)
+            filtersButtons.append(button)
             filtersStackView.addArrangedSubview(button)
+        }
+    }
+    
+    private func addSubviewsToDirectionStack() {
+        (0...1).forEach { index in
+            let button = UIButton()
+            button.setImage(UIImage(systemName: directionButtonsImageNames[index]), for: .normal)
+            button.tintColor = .tintColor
+            button.tag = index
+            button.addTarget(self, action: #selector(changeFilterDirectionAction(sender:)), for: .touchUpInside)
+            filterDirectionStackView.addArrangedSubview(button)
         }
     }
     
@@ -83,6 +111,15 @@ final class FiltersView: UIView {
             doneButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
             doneButton.widthAnchor.constraint(equalToConstant: 65),
             doneButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
+        ])
+    }
+    
+    private func createDirectionStackViewAnchors() {
+        NSLayoutConstraint.activate([
+            filterDirectionStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 20),
+            filterDirectionStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 100),
+            filterDirectionStackView.heightAnchor.constraint(equalToConstant: 100),
+            filterDirectionStackView.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     
@@ -95,11 +132,39 @@ final class FiltersView: UIView {
         ])
     }
     
-    @objc private func changeFilterAction(sender: UIButton) {
-        parameterHandler?()
+    @objc private func changeFilterDirectionAction(sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            directionHandler?(.up)
+        case 1:
+            directionHandler?(.down)
+        default:
+            break
+        }
     }
     
-    @objc private func dismissAction() {
+    @objc private func changeFilterAction(sender: UIButton) {
+        filtersButtons[previousButtonTag].setTitleColor(.black, for: .normal)
+        sender.setTitleColor(.tintColor, for: .normal)
+        previousButtonTag = sender.tag
+        switch sender.tag {
+        case 0:
+            parameterHandler?(.date)
+        case 1:
+            parameterHandler?(.instrument)
+        case 2:
+            parameterHandler?(.price)
+        case 3:
+            parameterHandler?(.amount)
+        case 4:
+            parameterHandler?(.side)
+        default:
+            break
+        }
+    
+    }
+    
+    @objc private func hideFiltersViewAction() {
         dismissHandler?()
     }
 }
