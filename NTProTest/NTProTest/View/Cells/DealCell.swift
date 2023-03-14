@@ -20,25 +20,25 @@ final class DealCell: UITableViewCell {
     
     private let instrumentNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "USD/RUB"
+        label.font = .systemFont(ofSize: 15)
         return label
     }()
     
     private let priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "62.10"
+        label.font = .systemFont(ofSize: 15)
         return label
     }()
     
     private let amountLabel: UILabel = {
         let label = UILabel()
-        label.text = "1 000 000"
+        label.font = .systemFont(ofSize: 15)
         return label
     }()
     
     private let sideLabel: UILabel = {
         let label = UILabel()
-        label.text = "buy"
+        label.font = .systemFont(ofSize: 15)
         return label
     }()
     
@@ -47,7 +47,6 @@ final class DealCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 10)
         label.textColor = .gray
-        label.text = "28.07.2023"
         return label
     }()
 
@@ -64,12 +63,39 @@ final class DealCell: UITableViewCell {
         createDateLabelAnchors()
     }
     
+    func configure(deal: Deal) {
+        instrumentNameLabel.text = deal.instrumentName
+        priceLabel.text = String(format: "%.2f", deal.price)
+        amountLabel.text = String(format: "%.0f", deal.amount)
+        sideLabel.text = convertSide(side: deal.side)
+        sideLabel.textColor = sideLabelColor(side: deal.side)
+        dealDateLabel.text = "\(deal.dateModifier.formatted(.dateTime))"
+    }
+    
     // MARK: - Private methods
     
     private func configureUI() {
         addSubviewsToStack()
         contentView.addSubview(dealDateLabel)
         contentView.addSubview(dealStackView)
+    }
+    
+    private func convertSide(side: Deal.Side) -> String {
+        switch side {
+        case .buy:
+            return "buy"
+        case .sell:
+            return "sell"
+        }
+    }
+    
+    private func sideLabelColor(side: Deal.Side) -> UIColor {
+        switch side {
+        case .buy:
+            return .green
+        case .sell:
+            return .red
+        }
     }
     
     private func addSubviewsToStack() {
@@ -81,17 +107,18 @@ final class DealCell: UITableViewCell {
     
     private func createDateLabelAnchors() {
         NSLayoutConstraint.activate([
-            dealDateLabel.topAnchor.constraint(equalTo: dealStackView.bottomAnchor),
-            dealDateLabel.leadingAnchor.constraint(equalTo: instrumentNameLabel.leadingAnchor)
+            dealDateLabel.topAnchor.constraint(equalTo: dealStackView.bottomAnchor, constant: 5),
+            dealDateLabel.leadingAnchor.constraint(equalTo: instrumentNameLabel.leadingAnchor),
+            dealDateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
     
     private func createStackViewAnchors() {
         NSLayoutConstraint.activate([
             dealStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            dealStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            dealStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dealStackView.bottomAnchor.constraint(equalTo: dealDateLabel.topAnchor)
+            dealStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            dealStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            dealStackView.bottomAnchor.constraint(equalTo: dealDateLabel.topAnchor, constant: -5)
         ])
     }
 }

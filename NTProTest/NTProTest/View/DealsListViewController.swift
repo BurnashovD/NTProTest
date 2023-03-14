@@ -14,13 +14,14 @@ final class DealsListViewController: UIViewController {
     private let dealsTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
     private let filtersView: FiltersView = {
         let view = FiltersView()
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 25
         view.backgroundColor = .white
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowRadius = 10
@@ -32,23 +33,23 @@ final class DealsListViewController: UIViewController {
     
     private var filterViewTopConstraint = NSLayoutConstraint()
     
-    // MARK: - Private properties
+    // MARK: - Public properties
     
-    private let cellTypes: [CellTypes] = [.filter, .deal]
+    var presenter: DealsPresenterProtocol?
 
     // MARK: - Public methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        presenter?.fetchDeals()
         bindFilters()
     }
     
     // MARK: - Private methods
     
     private func configureUI() {
-        navigationItem.title = "Deals"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.down"), style: .plain, target: self, action: #selector(openFiltersAction))
+        setupNavigationBar()
         setupTableView()
         view.addSubview(dealsTableView)
         view.addSubview(filtersView)
@@ -62,21 +63,42 @@ final class DealsListViewController: UIViewController {
         dealsTableView.register(HeaderCell.self, forHeaderFooterViewReuseIdentifier: HeaderCell.identifier)
     }
     
+    private func setupNavigationBar() {
+        navigationItem.title = "Deals"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.down"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(showFiltersViewAction))
+    }
+    
     private func setupLayout() {
         createTableViewAnchors()
         createFiltersViewAnchors()
     }
     
     private func bindFilters() {
-        filtersView.dismissHandler = {
-            self.filterViewTopConstraint.constant = 900
-            UIView.animate(withDuration: 0.3) {
-                self.filtersView.superview?.layoutIfNeeded()
-            }
+        filtersView.dismissHandler = { [weak self] in
+            guard let self = self else { return }
+            self.hideFiltersViewAction()
         }
         
-        filtersView.parameterHandler = {
-            print("Tap")
+        filtersView.parameterHandler = { [weak self] filter in
+            guard let self = self else { return }
+            self.presenter?.currentFilter = filter
+            self.dealsTableView.reloadData()
+        }
+        
+        filtersView.directionHandler = { [weak self] direction in
+            guard let self = self else { return }
+            self.presenter?.currentDirection = direction
+            self.dealsTableView.reloadData()
+        }
+    }
+    
+    private func hideFiltersViewAction() {
+        filterViewTopConstraint.constant = 900
+        UIView.animate(withDuration: 0.3) {
+            self.filtersView.superview?.layoutIfNeeded()
         }
     }
     
@@ -99,7 +121,7 @@ final class DealsListViewController: UIViewController {
         ])
     }
     
-    @objc private func openFiltersAction() {
+    @objc private func showFiltersViewAction() {
         filterViewTopConstraint.constant = 550
         UIView.animate(withDuration: 0.3) {
             self.filtersView.superview?.layoutIfNeeded()
@@ -109,17 +131,18 @@ final class DealsListViewController: UIViewController {
 
 /// UITableViewDelegate, UITableViewDataSource
 extension DealsListViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        guard let deals = presenter?.deals else { return 0 }
+        return deals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = dealsTableView.dequeueReusableCell(withIdentifier: "dealCell") as? DealCell
+            let cell = dealsTableView.dequeueReusableCell(withIdentifier: "dealCell") as? DealCell,
+            let deal = presenter?.deals[indexPath.row]
         else { return UITableViewCell() }
+        cell.configure(deal: deal)
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -128,11 +151,16 @@ extension DealsListViewController: UITableViewDelegate, UITableViewDataSource {
         else { return nil }
         return cell
     }
-}
-
-private extension DealsListViewController {
-    enum CellTypes {
-        case filter
-        case deal
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
     }
 }
+
+/// Реализация протокола вью
+extension DealsListViewController: DealsViewProtocol {
+    func loadDeals() {
+        dealsTableView.reloadData()
+    }
+}
+
