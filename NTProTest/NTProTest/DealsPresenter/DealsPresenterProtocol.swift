@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Протокол презентера экрана списка сделок
 protocol DealsPresenterProtocol {
     var deals: [Deal] { get set }
     var currentFilter: FiltersTypes { get set }

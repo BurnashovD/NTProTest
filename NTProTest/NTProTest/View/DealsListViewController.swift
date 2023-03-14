@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DealsListViewController.swift
 //  NTProTest
 //
 //  Created by Daniil on 14.03.2023.
