@@ -9,13 +9,15 @@
 /* Begin PBXBuildFile section */
 		A57E151129C0A62900129006 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E151029C0A62900129006 /* AppDelegate.swift */; };
 		A57E151329C0A62900129006 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E151229C0A62900129006 /* SceneDelegate.swift */; };
-		A57E151529C0A62900129006 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E151429C0A62900129006 /* ViewController.swift */; };
-		A57E151829C0A62900129006 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57E151629C0A62900129006 /* Main.storyboard */; };
+		A57E151529C0A62900129006 /* DealsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E151429C0A62900129006 /* DealsListViewController.swift */; };
 		A57E151A29C0A62B00129006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A57E151929C0A62B00129006 /* Assets.xcassets */; };
 		A57E151D29C0A62B00129006 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57E151B29C0A62B00129006 /* LaunchScreen.storyboard */; };
 		A57E152829C0A62B00129006 /* NTProTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E152729C0A62B00129006 /* NTProTestTests.swift */; };
 		A57E153229C0A62B00129006 /* NTProTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E153129C0A62B00129006 /* NTProTestUITests.swift */; };
 		A57E153429C0A62B00129006 /* NTProTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E153329C0A62B00129006 /* NTProTestUITestsLaunchTests.swift */; };
+		A57E154329C0ABB800129006 /* DealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E154229C0ABB800129006 /* DealCell.swift */; };
+		A57E154729C0ACA100129006 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E154629C0ACA100129006 /* HeaderCell.swift */; };
+		A57E154929C0E37100129006 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E154829C0E37100129006 /* FiltersView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +41,7 @@
 		A57E150D29C0A62900129006 /* NTProTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NTProTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57E151029C0A62900129006 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A57E151229C0A62900129006 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A57E151429C0A62900129006 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A57E151729C0A62900129006 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A57E151429C0A62900129006 /* DealsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealsListViewController.swift; sourceTree = "<group>"; };
 		A57E151929C0A62B00129006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A57E151C29C0A62B00129006 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A57E151E29C0A62B00129006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +50,9 @@
 		A57E152D29C0A62B00129006 /* NTProTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NTProTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57E153129C0A62B00129006 /* NTProTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTProTestUITests.swift; sourceTree = "<group>"; };
 		A57E153329C0A62B00129006 /* NTProTestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTProTestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A57E154229C0ABB800129006 /* DealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealCell.swift; sourceTree = "<group>"; };
+		A57E154629C0ACA100129006 /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
+		A57E154829C0E37100129006 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +105,10 @@
 			children = (
 				A57E151029C0A62900129006 /* AppDelegate.swift */,
 				A57E151229C0A62900129006 /* SceneDelegate.swift */,
-				A57E151429C0A62900129006 /* ViewController.swift */,
-				A57E151629C0A62900129006 /* Main.storyboard */,
+				A57E151429C0A62900129006 /* DealsListViewController.swift */,
+				A57E154229C0ABB800129006 /* DealCell.swift */,
+				A57E154629C0ACA100129006 /* HeaderCell.swift */,
+				A57E154829C0E37100129006 /* FiltersView.swift */,
 				A57E151929C0A62B00129006 /* Assets.xcassets */,
 				A57E151B29C0A62B00129006 /* LaunchScreen.storyboard */,
 				A57E151E29C0A62B00129006 /* Info.plist */,
@@ -233,7 +239,6 @@
 			files = (
 				A57E151D29C0A62B00129006 /* LaunchScreen.storyboard in Resources */,
 				A57E151A29C0A62B00129006 /* Assets.xcassets in Resources */,
-				A57E151829C0A62900129006 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,8 +263,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A57E151529C0A62900129006 /* ViewController.swift in Sources */,
+				A57E151529C0A62900129006 /* DealsListViewController.swift in Sources */,
 				A57E151129C0A62900129006 /* AppDelegate.swift in Sources */,
+				A57E154329C0ABB800129006 /* DealCell.swift in Sources */,
+				A57E154729C0ACA100129006 /* HeaderCell.swift in Sources */,
+				A57E154929C0E37100129006 /* FiltersView.swift in Sources */,
 				A57E151329C0A62900129006 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,14 +305,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A57E151629C0A62900129006 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A57E151729C0A62900129006 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A57E151B29C0A62B00129006 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -442,7 +442,6 @@
 				INFOPLIST_FILE = NTProTest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -470,7 +469,6 @@
 				INFOPLIST_FILE = NTProTest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
