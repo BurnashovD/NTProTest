@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Хедер
 final class HeaderCell: UITableViewHeaderFooterView {
     // MARK: - Visual components
     

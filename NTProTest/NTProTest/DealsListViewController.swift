@@ -9,7 +9,6 @@ import UIKit
 
 /// Экран со списком сделок
 final class DealsListViewController: UIViewController {
-    
     // MARK: - Visual components
     
     private let dealsTableView: UITableView = {

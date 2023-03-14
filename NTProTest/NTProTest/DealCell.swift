@@ -7,8 +7,8 @@
 
 import UIKit
 
+/// Ячейка со сделкой
 final class DealCell: UITableViewCell {
-    
     // MARK: - Visual components
     
     private let dealStackView: UIStackView = {

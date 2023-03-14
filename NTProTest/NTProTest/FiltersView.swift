@@ -7,7 +7,9 @@
 
 import UIKit
 
+/// Вью с фильтрами сделок
 final class FiltersView: UIView {
+    // MARK: - Visual components
     
     private let filtersStackView: UIStackView = {
         let stack = UIStackView()
@@ -27,10 +29,16 @@ final class FiltersView: UIView {
         return button
     }()
     
-    private let titles = ["Дата изменения сделки", "Имя инструмента", "Цена сделки", "Объем сделки", "Сторона сделки"]
+    // MARK: - Public properties
     
     var parameterHandler: (() -> Void)?
     var dismissHandler: (() -> Void)?
+    
+    // MARK: - Private properties
+    
+    private let titles = ["Дата изменения сделки", "Имя инструмента", "Цена сделки", "Объем сделки", "Сторона сделки"]
+    
+    // MARK: - init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,11 +49,15 @@ final class FiltersView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public methods
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         createStackViewAnchors()
         createDoneButtonAnchors()
     }
+    
+    // MARK: - Private methods
     
     private func configureUI() {
         addSubviewsToStack()
