@@ -15,7 +15,6 @@ final class FiltersView: UIView {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.spacing = 1
         stack.alignment = .leading
         stack.distribution = .equalCentering
         return stack
