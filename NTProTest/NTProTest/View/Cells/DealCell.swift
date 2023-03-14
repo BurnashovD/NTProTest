@@ -70,6 +70,7 @@ final class DealCell: UITableViewCell {
         sideLabel.text = convertSide(side: deal.side)
         sideLabel.textColor = sideLabelColor(side: deal.side)
         dealDateLabel.text = "\(deal.dateModifier.formatted(.dateTime))"
+        priceLabel.textColor = sideLabelColor(side: deal.side)
     }
     
     // MARK: - Private methods
