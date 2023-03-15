@@ -17,6 +17,8 @@ final class DealsPresenter: DealsPresenterProtocol {
     
     // MARK: - Private properties
     
+    private let dealsLock = NSLock()
+    
     private weak var view: DealsViewProtocol?
     private var server: ServerProtocol?
     
@@ -32,7 +34,9 @@ final class DealsPresenter: DealsPresenterProtocol {
     func fetchDeals() {
         server?.subscribeToDeals(callback: { [weak self] deals in
             guard let self = self else { return }
+            self.dealsLock.lock()
             self.deals.append(contentsOf: deals)
+            self.dealsLock.unlock()
             self.sortDeals(filter: self.currentFilter, direction: self.currentDirection)
         })
     }
@@ -40,6 +44,7 @@ final class DealsPresenter: DealsPresenterProtocol {
     func sortDeals(filter: FiltersTypes, direction: FiltersTypes.Directions) {
         let queue = DispatchQueue(label: Constants.sortQueueLabel)
         queue.async {
+            self.dealsLock.lock()
             switch filter {
             case .date:
                 self.deals.sort {
@@ -62,6 +67,7 @@ final class DealsPresenter: DealsPresenterProtocol {
                     direction == .up ? $0.instrumentName < $1.instrumentName : $0.instrumentName > $1.instrumentName
                 }
             }
+            self.dealsLock.unlock()
             DispatchQueue.main.async {
                 self.view?.loadDeals()
             }
