@@ -13,4 +13,5 @@ protocol DealsPresenterProtocol {
     var currentFilter: FiltersTypes { get set }
     var currentDirection: FiltersTypes.Directions { get set }
     func fetchDeals()
+    func sortDeals(filter: FiltersTypes, direction: FiltersTypes.Directions)
 }

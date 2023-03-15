@@ -34,14 +34,11 @@ final class DealsPresenter: DealsPresenterProtocol {
             guard let self = self else { return }
             self.deals.append(contentsOf: deals)
             self.sortDeals(filter: self.currentFilter, direction: self.currentDirection)
-            self.view?.loadDeals()
         })
     }
     
-    // MARK: - Private methods
-    
-    private func sortDeals(filter: FiltersTypes, direction: FiltersTypes.Directions) {
-        let queue = DispatchQueue(label: "sortQueue")
+    func sortDeals(filter: FiltersTypes, direction: FiltersTypes.Directions) {
+        let queue = DispatchQueue(label: Constants.sortQueueLabel)
         queue.async {
             switch filter {
             case .date:
@@ -65,8 +62,17 @@ final class DealsPresenter: DealsPresenterProtocol {
                     direction == .up ? $0.instrumentName < $1.instrumentName : $0.instrumentName > $1.instrumentName
                 }
             }
+            DispatchQueue.main.async {
+                self.view?.loadDeals()
+            }
         }
     }
 }
 
+/// Константы
+private extension DealsPresenter {
+    enum Constants {
+        static let sortQueueLabel = "sortQueue"
+    }
+}
 

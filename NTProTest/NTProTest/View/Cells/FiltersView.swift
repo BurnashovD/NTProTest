@@ -30,7 +30,7 @@ final class FiltersView: UIView {
     
     private let doneButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Done", for: .normal)
+        button.setTitle(Constants.doneButtonTitle, for: .normal)
         button.setTitleColor(.tintColor, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -44,9 +44,6 @@ final class FiltersView: UIView {
     
     // MARK: - Private properties
     
-    private let titles = ["Дата изменения сделки", "Имя инструмента", "Цена сделки", "Объем сделки", "Сторона сделки"]
-    private let directionButtonsImageNames = ["chevron.up", "chevron.down"]
-    
     private var filtersButtons: [UIButton] = []
     private var previousButtonTag = 0
     
@@ -58,7 +55,7 @@ final class FiltersView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
     
     // MARK: - Public methods
@@ -82,9 +79,9 @@ final class FiltersView: UIView {
     }
     
     private func addSubviewsToFiltersStack() {
-        (0...4).forEach { index in
+        (Constants.filtersButtonCount).forEach { index in
             let button = UIButton()
-            button.setTitle(titles[index], for: .normal)
+            button.setTitle(Constants.titles[index], for: .normal)
             button.titleLabel?.font = .systemFont(ofSize: 15)
             button.setTitleColor(index == 0 ? .tintColor : .black, for: .normal)
             button.tag = index
@@ -95,9 +92,9 @@ final class FiltersView: UIView {
     }
     
     private func addSubviewsToDirectionStack() {
-        (0...1).forEach { index in
+        (Constants.directionButtonsCount).forEach { index in
             let button = UIButton()
-            button.setImage(UIImage(systemName: directionButtonsImageNames[index]), for: .normal)
+            button.setImage(UIImage(systemName: Constants.directionButtonsImageNames[index]), for: .normal)
             button.tintColor = .tintColor
             button.tag = index
             button.addTarget(self, action: #selector(changeFilterDirectionAction(sender:)), for: .touchUpInside)
@@ -165,5 +162,16 @@ final class FiltersView: UIView {
     
     @objc private func hideFiltersViewAction() {
         dismissHandler?()
+    }
+}
+
+/// Константы
+private extension FiltersView {
+    enum Constants {
+        static let titles = ["Дата изменения сделки", "Имя инструмента", "Цена сделки", "Объем сделки", "Сторона сделки"]
+        static let directionButtonsImageNames = ["chevron.up", "chevron.down"]
+        static let filtersButtonCount: ClosedRange = 0...4
+        static let directionButtonsCount: ClosedRange = 0...1
+        static let doneButtonTitle = "Done"
     }
 }
