@@ -59,7 +59,7 @@ final class HeaderCell: UITableViewHeaderFooterView {
     }
 }
 
-
+/// Константы
 extension HeaderCell {
     enum Constants {
         static let identifier = "headerCell"
