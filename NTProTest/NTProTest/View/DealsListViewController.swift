@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DealsListViewController.swift
 //  NTProTest
 //
 //  Created by Daniil on 14.03.2023.
@@ -59,13 +59,13 @@ final class DealsListViewController: UIViewController {
     private func setupTableView() {
         dealsTableView.delegate = self
         dealsTableView.dataSource = self
-        dealsTableView.register(DealCell.self, forCellReuseIdentifier: "dealCell")
-        dealsTableView.register(HeaderCell.self, forHeaderFooterViewReuseIdentifier: HeaderCell.identifier)
+        dealsTableView.register(DealCell.self, forCellReuseIdentifier: Constants.dealCellIdentifier)
+        dealsTableView.register(HeaderCell.self, forHeaderFooterViewReuseIdentifier: HeaderCell.Constants.identifier)
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "Deals"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.down"),
+        navigationItem.title = Constants.navigationTitle
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: Constants.rightBarButtonItemImageName),
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(showFiltersViewAction))
@@ -83,20 +83,26 @@ final class DealsListViewController: UIViewController {
         }
         
         filtersView.parameterHandler = { [weak self] filter in
-            guard let self = self else { return }
+            guard
+                let self = self,
+                let direction = self.presenter?.currentDirection
+            else { return }
             self.presenter?.currentFilter = filter
-            self.dealsTableView.reloadData()
+            self.presenter?.sortDeals(filter: filter, direction: direction)
         }
         
         filtersView.directionHandler = { [weak self] direction in
-            guard let self = self else { return }
+            guard
+                let self = self,
+                let filter = self.presenter?.currentFilter
+            else { return }
             self.presenter?.currentDirection = direction
-            self.dealsTableView.reloadData()
+            self.presenter?.sortDeals(filter: filter, direction: direction)
         }
     }
     
     private func hideFiltersViewAction() {
-        filterViewTopConstraint.constant = 900
+        filterViewTopConstraint.constant = Constants.hiddenFilterViewTopAnchorValue
         UIView.animate(withDuration: 0.3) {
             self.filtersView.superview?.layoutIfNeeded()
         }
@@ -112,7 +118,7 @@ final class DealsListViewController: UIViewController {
     }
     
     private func createFiltersViewAnchors() {
-        filterViewTopConstraint = filtersView.topAnchor.constraint(equalTo: view.topAnchor, constant: 900)
+        filterViewTopConstraint = filtersView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.hiddenFilterViewTopAnchorValue)
         NSLayoutConstraint.activate([
             filterViewTopConstraint,
             filtersView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -122,7 +128,7 @@ final class DealsListViewController: UIViewController {
     }
     
     @objc private func showFiltersViewAction() {
-        filterViewTopConstraint.constant = 550
+        filterViewTopConstraint.constant = Constants.shownFilterViewTopAnchorValue
         UIView.animate(withDuration: 0.3) {
             self.filtersView.superview?.layoutIfNeeded()
         }
@@ -138,7 +144,7 @@ extension DealsListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = dealsTableView.dequeueReusableCell(withIdentifier: "dealCell") as? DealCell,
+            let cell = dealsTableView.dequeueReusableCell(withIdentifier: Constants.dealCellIdentifier) as? DealCell,
             let deal = presenter?.deals[indexPath.row]
         else { return UITableViewCell() }
         cell.configure(deal: deal)
@@ -147,7 +153,7 @@ extension DealsListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard
-            let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderCell.identifier) as? HeaderCell
+            let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderCell.Constants.identifier) as? HeaderCell
         else { return nil }
         return cell
     }
@@ -161,6 +167,17 @@ extension DealsListViewController: UITableViewDelegate, UITableViewDataSource {
 extension DealsListViewController: DealsViewProtocol {
     func loadDeals() {
         dealsTableView.reloadData()
+    }
+}
+
+/// Константы
+private extension DealsListViewController {
+    enum Constants {
+        static let dealCellIdentifier = "dealCell"
+        static let navigationTitle = "Deals"
+        static let rightBarButtonItemImageName = "chevron.down"
+        static let hiddenFilterViewTopAnchorValue: CGFloat = 900
+        static let shownFilterViewTopAnchorValue: CGFloat = 550
     }
 }
 

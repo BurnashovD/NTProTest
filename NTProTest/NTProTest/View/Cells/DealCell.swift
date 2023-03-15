@@ -65,11 +65,12 @@ final class DealCell: UITableViewCell {
     
     func configure(deal: Deal) {
         instrumentNameLabel.text = deal.instrumentName
-        priceLabel.text = String(format: "%.2f", deal.price)
-        amountLabel.text = String(format: "%.0f", deal.amount)
+        priceLabel.text = String(format: Constants.twoSymbolsStringFormat, deal.price)
+        amountLabel.text = String(format: Constants.zeroSymbolsStringFormat, deal.amount)
         sideLabel.text = convertSide(side: deal.side)
         sideLabel.textColor = sideLabelColor(side: deal.side)
         dealDateLabel.text = "\(deal.dateModifier.formatted(.dateTime))"
+        priceLabel.textColor = sideLabelColor(side: deal.side)
     }
     
     // MARK: - Private methods
@@ -83,9 +84,9 @@ final class DealCell: UITableViewCell {
     private func convertSide(side: Deal.Side) -> String {
         switch side {
         case .buy:
-            return "buy"
+            return Constants.butText
         case .sell:
-            return "sell"
+            return Constants.sellText
         }
     }
     
@@ -120,5 +121,15 @@ final class DealCell: UITableViewCell {
             dealStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             dealStackView.bottomAnchor.constraint(equalTo: dealDateLabel.topAnchor, constant: -5)
         ])
+    }
+}
+
+/// Константы
+private extension DealCell {
+    enum Constants {
+        static let butText = "buy"
+        static let sellText = "sell"
+        static let twoSymbolsStringFormat = "%.2f"
+        static let zeroSymbolsStringFormat = "%.0f"
     }
 }

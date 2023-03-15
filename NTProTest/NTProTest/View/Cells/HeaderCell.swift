@@ -17,15 +17,7 @@ final class HeaderCell: UITableViewHeaderFooterView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
-    // MARK: - Public properties
-    
-    static let identifier = "headerCell"
-    
-    // MARK: - Private properties
-    
-    private let titles = ["Instruments", "Price", "Amount", "Side"]
-    
+
     // MARK: - init
     
     override init(reuseIdentifier: String?) {
@@ -35,7 +27,7 @@ final class HeaderCell: UITableViewHeaderFooterView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
     }
     
     // MARK: - Public methods
@@ -48,11 +40,11 @@ final class HeaderCell: UITableViewHeaderFooterView {
     // MARK: - Private methods
     
     private func addArrangeSubviews() {
-        (0...3).forEach { index in
+        (Constants.buttonsCount).forEach { index in
             let label = UILabel()
             label.font = .systemFont(ofSize: 14)
             label.textColor = .black
-            label.text = titles[index]
+            label.text = Constants.titles[index]
             parametersStackView.addArrangedSubview(label)
         }
     }
@@ -64,6 +56,15 @@ final class HeaderCell: UITableViewHeaderFooterView {
             parametersStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             parametersStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
+    }
+}
+
+
+extension HeaderCell {
+    enum Constants {
+        static let identifier = "headerCell"
+        static let titles = ["Instruments", "Price", "Amount", "Side"]
+        static let buttonsCount: ClosedRange = 0...3
     }
 }
 
